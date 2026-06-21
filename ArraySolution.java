@@ -159,15 +159,20 @@ public class ArraySolution {
      * @return
      */
     public static List<String> decode(String str) {
+        List<String> res = new ArrayList<>();
         int i = 0;
         while (i < str.length()) {
-            for (int j = i; j < Integer.parseInt(str.substring(i,i+1)) + 2; j++) {
-                System.out.print(str.charAt(j));
+            int j = i;
+            while (str.charAt(j) != '#') {
+                j++;
             }
-            System.out.println("");
-            i = Integer.parseInt(str.substring(i,i+1)) + 2;
+            int length = Integer.parseInt(str.substring(i, j));
+            i = j + 1;
+            j = i + length;
+            res.add(str.substring(i, j));
+            i = j;
         }
-        return null;
+        return res;
     }
 
     public static void main(String[] args) {
@@ -190,7 +195,7 @@ public class ArraySolution {
         // System.out.println(Arrays.toString(topKFrequent(nums, 2)));
 
         // // Encode and Decode Strings
-        List<String> val = Arrays.asList("neet", "code", "love", "you");
+        List<String> val = Arrays.asList("we", "say", ":", "yes", "!@#$%^&*()");
         System.out.println(decode(encode(val)));
 
     }
