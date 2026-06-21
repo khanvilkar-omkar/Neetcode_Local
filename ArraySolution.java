@@ -137,6 +137,39 @@ public class ArraySolution {
 
     }
 
+    /**
+     * Encode and Decode Strings
+     * 
+     * @param strs
+     * @return
+     */
+    public static String encode(List<String> strs) {
+        StringBuilder decodeString = new StringBuilder();
+        for (String s : strs) {
+            decodeString.append(s.length()).append('#').append(s);
+        }
+        return decodeString.toString();
+
+    }
+
+    /**
+     * Same as a above function problem: Encode and Decode Strings
+     * 
+     * @param str
+     * @return
+     */
+    public static List<String> decode(String str) {
+        int i = 0;
+        while (i < str.length()) {
+            for (int j = i; j < Integer.parseInt(str.substring(i,i+1)) + 2; j++) {
+                System.out.print(str.charAt(j));
+            }
+            System.out.println("");
+            i = Integer.parseInt(str.substring(i,i+1)) + 2;
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         // // Contains Duplicate
         // int[] numbers = { 10, 20, 30, 40, 50 };
@@ -153,8 +186,12 @@ public class ArraySolution {
         // String[] strs = { "act", "pots", "tops", "cat", "stop", "hat" };
         // System.out.println(groupAnagrams(strs));
 
-        int[] nums = { 1, 1, 1, 2, 2, 3 };
-        System.out.println(Arrays.toString(topKFrequent(nums, 2)));
+        // int[] nums = { 1, 1, 1, 2, 2, 3 };
+        // System.out.println(Arrays.toString(topKFrequent(nums, 2)));
+
+        // // Encode and Decode Strings
+        List<String> val = Arrays.asList("neet", "code", "love", "you");
+        System.out.println(decode(encode(val)));
 
     }
 
