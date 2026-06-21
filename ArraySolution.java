@@ -109,18 +109,30 @@ public class ArraySolution {
      * @return
      */
     public static int[] topKFrequent(int[] nums, int k) {
-        int[] ans = new int[k];
-        Map<Integer, Integer> mapping = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-             if (mapping.containsKey(nums[i])) {
-                mapping.put(nums[i], mapping.get(nums[i])+1);
-             }else{
-                mapping.put(nums[i],1);
-             }
-        }
-        System.out.println(mapping.values());
+        // Map<Integer, Integer> mapping = new HashMap<>();
+        // for (int n : nums) {
+        //     if (mapping.containsKey(n)) {
+        //         mapping.put(n, mapping.getOrDefault(mapping.get(n), 0) + 1);
+        //     } else {
+        //         mapping.put(n, 1);
+        //     }
+        // }
+        // List<Integer>[] buckets = new List[nums.length + 1];
+        // mapping.forEach((num, freq) -> {
+        //     if (buckets[freq] == null) {
+        //         buckets[freq] = new ArrayList<>();
+        //     }
+        //     buckets[freq].add(num);
+        // });
+        // List<Integer> result = new ArrayList<>();
+        // for (int i = buckets.length - 1; i > 0 && result.size() < k; i--) {
+        //     if (buckets[i] != null) {
+        //         result.addAll(buckets[i]);
+        //     }
+        // }
 
-        return ans;
+        // return result.stream().mapToInt(i -> i).toArray();
+
     }
 
     public static void main(String[] args) {
@@ -139,8 +151,8 @@ public class ArraySolution {
         // String[] strs = { "act", "pots", "tops", "cat", "stop", "hat" };
         // System.out.println(groupAnagrams(strs));
 
-        int[] nums = {1,2,2,3,3,3};
-        System.out.println(topKFrequent(nums,2));
+        int[] nums = { 1, 2, 2, 3, 3, 3, 4, 5, 5, 5 };
+        System.out.println(Arrays.toString(topKFrequent(nums, 2)));
 
     }
 
