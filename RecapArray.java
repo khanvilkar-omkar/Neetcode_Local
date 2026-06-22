@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Recap1 {
+public class RecapArray {
     public static List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> keys = new HashMap<>();
         for (String s : strs) {

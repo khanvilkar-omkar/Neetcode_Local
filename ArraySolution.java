@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -175,6 +176,76 @@ public class ArraySolution {
         return res;
     }
 
+    /**
+     * Products of Array Except Self
+     * 
+     * @param nums
+     * @return
+     */
+    public static int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        int[] pref = new int[n];
+        int[] suff = new int[n];
+
+        pref[0] = 1;
+        suff[n - 1] = 1;
+        for (int i = 1; i < n; i++) {
+            pref[i] = pref[i - 1] * nums[i - 1];
+        }
+
+        for (int i = n - 2; i >= 0; i--) {
+            suff[i] = suff[i + 1] * nums[i + 1];
+        }
+
+        for (int i = 0; i < n; i++) {
+            result[i] = pref[i] * suff[i];
+        }
+        return result;
+    }
+
+    public static boolean isValidSudoku(char[][] board) {
+        Set<String> seen = new HashSet<>();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char num = board[i][j];
+                if (num != '.') {
+                    if (!seen.add(num + " at row " + i) ||
+                            !seen.add(num + " at col " + j) ||
+                            !seen.add(num + " is in box " + i / 3 + " " + j / 3)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Longest Consecutive Sequence
+     * 
+     * @param nums
+     * @return
+     */
+    public static int longestConsecutive(int[] nums) {
+        int ans = 0;
+        Set<Integer> numbers = new HashSet<>();
+        for (int i : nums) {
+            numbers.add(i);
+        }
+
+        for (int i : numbers) {
+            int maxlength = 1;
+            while (numbers.contains(i + 1)) {
+                maxlength++;
+                i++;
+            }
+            ans = Math.max(ans, maxlength);
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         // // Contains Duplicate
         // int[] numbers = { 10, 20, 30, 40, 50 };
@@ -195,9 +266,30 @@ public class ArraySolution {
         // System.out.println(Arrays.toString(topKFrequent(nums, 2)));
 
         // // Encode and Decode Strings
-        List<String> val = Arrays.asList("we", "say", ":", "yes", "!@#$%^&*()");
-        System.out.println(decode(encode(val)));
+        // List<String> val = Arrays.asList("we", "say", ":", "yes", "!@#$%^&*()");
+        // System.out.println(decode(encode(val)));
 
+        // // Products of Array Except Self
+        // int[] numbers = { 1, 2, 4, 6 };
+        // System.out.println(Arrays.toString(productExceptSelf(numbers)));
+
+        // // Valid Sudoku
+        // char[][] sudoku = {
+        // { '1', '2', '.', '.', '3', '.', '.', '.', '.' },
+        // { '4', '.', '.', '5', '.', '.', '.', '.', '.' },
+        // { '.', '9', '8', '.', '.', '.', '.', '.', '3' },
+        // { '5', '.', '.', '.', '6', '.', '.', '.', '4' },
+        // { '.', '.', '.', '8', '.', '3', '.', '.', '5' },
+        // { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
+        // { '.', '.', '.', '.', '.', '.', '2', '.', '.' },
+        // { '.', '.', '.', '4', '1', '9', '.', '.', '8' },
+        // { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
+        // };
+        // System.out.println(isValidSudoku(sudoku));
+
+        // // Longest Consecutive Sequence
+        int[] nums = { 2, 20, 4, 10, 3, 4, 5 };
+        System.out.println(longestConsecutive(nums));
     }
 
 }
