@@ -1,7 +1,11 @@
 package TwoPointer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class TwoPointerSolution {
 
@@ -51,14 +55,50 @@ public class TwoPointerSolution {
         return ans;
     }
 
+    /**
+     * 3Sum
+     * https://www.youtube.com/watch?v=cRBSOz49fQk
+     * 
+     * @param nums
+     * @return
+     */
+    public static List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        Set<List<Integer>> result = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int left = i + 1;
+            int right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum == 0) {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    right--;
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+
+        }
+        return new ArrayList<>(result);
+    }
+
     public static void main(String[] args) {
         // // isPalindrome
         // String s = "Was it a car or a cat I saw?";
         // System.out.println(isPalindrome(s));
 
         // // Two Integer Sum II
-        int[] numbers = { 2, 3, 4 };
-        System.out.println(Arrays.toString(twoSum(numbers, 6)));
+        // int[] numbers = { 2, 3, 4 };
+        // System.out.println(Arrays.toString(twoSum(numbers, 6)));
+
+        // // 3Sum
+        int[] nums = { -1, 0, 1, 2, -1, -4 };
+        System.out.println(threeSum(nums));
+
     }
 
 }
