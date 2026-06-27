@@ -86,6 +86,41 @@ public class TwoPointerSolution {
         return new ArrayList<>(result);
     }
 
+    /**
+     * Container With Most Water
+     * 
+     * @param heights
+     * @return
+     */
+    public static int maxArea(int[] heights) {
+        // int ans = 0;
+        // for (int left = 0; left < heights.length; left++) {
+        // int right = heights.length - 1;
+        // while (left < right) {
+        // int area = Math.min(heights[left], heights[right]) * (right - left);
+        // // System.out.println(area);
+        // ans = Math.max(ans, area);
+        // right--;
+        // }
+
+        // }
+        // return ans;
+
+        int ans = 0;
+        int left = 0;
+        int right = heights.length - 1;
+        while (left < right) {
+            int area = Math.min(heights[left], heights[right]) * (right - left);
+            ans = Math.max(area, ans);
+            if (heights[left] < heights[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         // // isPalindrome
         // String s = "Was it a car or a cat I saw?";
@@ -96,8 +131,12 @@ public class TwoPointerSolution {
         // System.out.println(Arrays.toString(twoSum(numbers, 6)));
 
         // // 3Sum
-        int[] nums = { -1, 0, 1, 2, -1, -4 };
-        System.out.println(threeSum(nums));
+        // int[] nums = { -1, 0, 1, 2, -1, -4 };
+        // System.out.println(threeSum(nums));
+
+        // // Container With Most Water
+        int[] height = { 1, 7, 2, 5, 4, 7, 3, 6 };
+        System.out.println(maxArea(height));
 
     }
 
